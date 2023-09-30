@@ -138,7 +138,7 @@ client.on('interactionCreate', async interaction => {
 });
 
 client.on('presenceUpdate', async (oldPresence, newPresence) => {
-    if (newPresence.userId === '329671025312923648') {
+    if (newPresence.userId === ownerId) {
         await db.set('presence', newPresence);
     };
 });
