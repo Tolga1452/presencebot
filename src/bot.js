@@ -145,6 +145,8 @@ client.on('presenceUpdate', async (oldPresence, newPresence) => {
             return activity;
         });
 
+        console.log(newPresence.activities)
+
         await db.set('presence', newPresence);
     };
 });
