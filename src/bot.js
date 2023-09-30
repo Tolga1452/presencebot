@@ -139,6 +139,8 @@ client.on('interactionCreate', async interaction => {
 
 client.on('presenceUpdate', async (oldPresence, newPresence) => {
     if (newPresence.userId === ownerId) {
+        if (newPresence.activities.filter(activity => activity.type === 4)[0]) newPresence.activities[newPresence.activities.indexOf(newPresence.activities.filter(activity => activity.type === 4)[0])].emoji = newPresence.activities.filter(activity => activity.type === 4)[0].emoji.url;
+
         await db.set('presence', newPresence);
     };
 });
