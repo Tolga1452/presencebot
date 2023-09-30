@@ -140,7 +140,7 @@ client.on('interactionCreate', async interaction => {
 client.on('presenceUpdate', async (oldPresence, newPresence) => {
     if (newPresence.userId === ownerId) {
         newPresence.activities = newPresence.activities.map(activity => {
-            if (activity.type === 4) activity.emoji = activity.emoji.url;
+            if (activity.type === 4 && activity.emoji) activity.emoji = activity.emoji.url;
 
             return activity;
         });
