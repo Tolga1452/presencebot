@@ -4,12 +4,17 @@ const { default: axios } = require('axios');
 const logger = require('./modules/logger');
 const { localize } = require('./modules/localization');
 const { ownerId, developerIds } = require('../config');
+const { QuickDB } = require('quick.db');
+const express = require('express');
 
 const client = new Client({
     intents: [
-        'Guilds'
+        'Guilds',
+        'GuildPresences'
     ]
 });
+const db = new QuickDB();
+const app = express();
 
 client.commands = new Collection();
 
@@ -131,5 +136,19 @@ client.on('interactionCreate', async interaction => {
         };
     };
 });
+
+client.on('presenceUpdate', async (oldPresence, newPresence) => {
+    if (newPresence.userId === '329671025312923648') {
+        await db.set('presence', newPresence);
+    };
+});
+
+app.get('/presence', async (req, res) => {
+    let presence = await db.get('presence') ?? {};
+
+    res.json(presence);
+});
+
+app.listen(1000, () => logger('info', 'WEB', 'Listening on port 1000'));
 
 client.login(process.env.DISCORD_TOKEN);
