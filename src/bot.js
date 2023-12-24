@@ -157,6 +157,6 @@ app.get('/presence', async (req, res) => {
     res.json(presence);
 });
 
-app.listen(3401, () => logger('info', 'WEB', 'Listening on port 3401'));
+app.listen(5002, () => logger('info', 'WEB', 'Listening on port 5002'));
 
 client.login(process.env.DISCORD_TOKEN);
